@@ -1,0 +1,80 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="row">
+  <h1 class="text-center">New Location</h1>
+  <div class="col-6 offset-3">
+    <form action="/locations" method="POST" class="validated-form" novalidate>
+      <div class="mb-3">
+        <label class="form-label" for="title">Title</label>
+        <input
+          class="form-control"
+          type="text"
+          id="title"
+          name="title"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="location">Location</label>
+        <input
+          class="form-control"
+          type="text"
+          id="location"
+          name="city"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="image">Image Url</label>
+        <input
+          class="form-control"
+          type="text"
+          id="image"
+          name="image"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="category">Category</label>
+        <input
+          class="form-control"
+          type="text"
+          id="category"
+          name="category"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" for="price">Campground Price</label>
+        <div class="input-group">
+          <span class="input-group-text" id="price-label">$</span>
+          <input
+            type="text"
+            class="form-control"
+            id="price"
+            placeholder="0.00"
+            aria-label="price"
+            aria-describedby="price-label"
+            name="price"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="description">Description</label>
+        <textarea
+          class="form-control"
+          type="text"
+          id="description"
+          name="description"
+          required
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-success">Add Location</button>
+      </div>
+    </form>
+    <a href="/locations">All Location</a>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/stylesheets/home.css" />
+    <title>Jordanian Experience</title>
+  </head>
+  <body>
+    <section>
+      <div class="circle"></div>
+      <header class="nav">
+        <a href="#"><img src="/images/logo.png" alt="logo" class="logo" /></a>
+        <div class="toggle" onclick="toggleMenu();"></div>
+        <ul class="navigation">
+          <li><a href="/locations">Review</a></li>
+          <li><a href="/register">Log in</a></li>
+          <li><a href="/register">Sign up</a></li>
+        </ul>
+      </header>
+      <div class="content">
+        <div class="textBox">
+          <h2>
+            Welcome To <br />
+            <span>Jordanian Experience</span>
+          </h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. In libero
+            accusantium assumenda inventore maxime ex laudantium rem ab
+            repellendus beatae sapiente culpa sunt, aspernatur asperiores.
+          </p>
+          <a href="/locations">View Locations</a>
+        </div>
+        <div class="imgBox">
+          <img src="/images/native2.png" alt="" class="phone" height="450" />
+          <img src="/images/logo.png" alt="Je" class="logo1" />
+          <a href="#" class="share"
+            >Share Your<br />
+            Experience</a
+          >
+        </div>
+      </div>
+    </section>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+      integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function toggleMenu() {
+        var menuToggle = document.querySelector('.toggle');
+        var navigation = document.querySelector('.navigation');
+        menuToggle.classList.toggle('active');
+        navigation.classList.toggle('active');
+      }
+    </script>
+    <script src="/scripts/navbar.js"></script>
+  </body>
+</html>

@@ -1,0 +1,152 @@
+<% layout('layouts/boilerplate')%>
+<link rel="stylesheet" href="/stylesheets/stars.css" />
+<link rel="stylesheet" href="/stylesheets/show.css" />
+<link rel="stylesheet" href="/stylesheets/navbar.css" />
+<div class = "card-wrapper">
+  <div class = "card">
+    <!-- card left -->
+    <div class = "product-imgs">
+      <div class = "img-display">
+        <div class = "img-showcase">
+          <img src = "<%= location.image %>" alt = "shoe image">
+
+        </div>
+      </div>
+
+    </div>
+    <!-- card right -->
+    <div class = "product-content">
+      <h2 class = "product-title"><%=location.title %></h2>
+      
+      <div class = "product-rating">
+        <i class = "fas fa-star"></i>
+        <i class = "fas fa-star"></i>
+        <i class = "fas fa-star"></i>
+        <i class = "fas fa-star"></i>
+        <i class = "fas fa-star-half-alt"></i>
+        
+      </div>
+
+      <div class = "product-price">
+        <p class = "last-price">Average Price: <span> <%=location.price%> </span> per person </p>
+
+      </div>
+
+      <div class = "product-detail">
+        <h2>Description </h2>
+        <p><%= location.description %></p>
+        
+        <div id="map" style="width: 400px; height: 300px"></div>
+      </div>
+
+      <% if (currentUser && location.author.equals(currentUser._id)) { %>
+        <div class="card-body">
+          <a
+            class="card-link btn btn-info"
+            href="/locations/<%=location._id%>/edit"
+            >Edit</a
+          >
+          <form
+            class="d-inline"
+            action="/locations/<%=location._id%>?_method=DELETE"
+            method="POST"
+          >
+            <button class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+        <% } %>
+
+    </div>
+  </div>
+</div>
+  <div class="col-6" style="margin-top: 50px; margin-left: 100px;">
+    
+    <% if(currentUser) { %>
+    <h4>Leave a Review</h4>
+    <form
+      action="/locations/<%= location._id %>/reviews"
+      method="POST"
+      novalidate
+      class="validated-form"
+    >
+      <div class="mb-3">
+        <fieldset class="starability-basic">
+          <input
+            type="radio"
+            id="no-rate"
+            class="input-no-rate"
+            name="rating"
+            value="1"
+            checked
+            aria-label="No rating."
+          />
+          <input type="radio" id="first-rate1" name="rating" value="1" />
+          <label for="first-rate1" title="Terrible">1 star</label>
+          <input type="radio" id="first-rate2" name="rating" value="2" />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input type="radio" id="first-rate3" name="rating" value="3" />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input type="radio" id="first-rate4" name="rating" value="4" />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input type="radio" id="first-rate5" name="rating" value="5" />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+      </div>
+      <div class="mb-3">
+        <label for="e" class="form-label">Review</label>
+        <textarea
+          name="body"
+          id="e"
+          cols="50"
+          rows="3"
+          class="form-control"
+          required
+        ></textarea>
+      </div>
+      <button class="btn btn-success">Submit</button>
+    </form>
+    <% } %> <% for(let x of location.reviews){ %>
+    <div class="card mb-3 mt-2">
+      <div class="card-body">
+        <h6 class="card-subtitle mb-2"><%= x.author.username%></h6>
+        <p class="starability-result" data-rating="<%= x.rating %>">
+          Rated: <%= x.rating %> stars
+        </p>
+
+        <p class="card-text">Review: <b><%= x.body %></b></p>
+        <% if (currentUser && x.author.equals(currentUser._id)) { %>
+        <form
+          action="/locations/<%= location._id%>/reviews/<%= x._id %>?_method=DELETE "
+          method="POST"
+        >
+          <button class="btn btn-sm btn-danger">Delete</button>
+        </form>
+        <% } %>
+      </div>
+    </div>
+    <% } %>
+  </div>
+</div>
+<script>
+  const campground = <%- JSON.stringify(location) %>
+</script>
+
+<script>
+  mapboxgl.accessToken =
+    'pk.eyJ1IjoiYW1lcmswMCIsImEiOiJjbDJqMHdnOW8wdDIwM2Zxd2VoajZqazJuIn0.L01AoI4L1nmt-iTTWVmVuA';
+  const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v11', // style URL
+    center: campground.geometry.coordinates, // starting position [lng, lat]
+    zoom: 13, // starting zoom
+  });
+
+  const marker2 = new mapboxgl.Marker({ color: 'red', rotation: 45 })
+    .setLngLat(campground.geometry.coordinates)
+    .setPopup(
+      new mapboxgl.Popup({ offset: 25 }).setHTML(
+        `<h3>${campground.title}</h3><p>${campground.city}</p>`
+      )
+    )
+    .addTo(map);
+</script>

@@ -1,0 +1,14 @@
+<header>
+  <a href="/"><img src="/images/logo1.png" alt="logo" class="logo" /></a>
+  <div class="toggle" onclick="toggleMenu();"></div>
+  <ul class="navigation">
+    <li><a href="/locations">All Locations</a></li>
+    <li><a href="/locations/new">Create a location</a></li>
+    <% if(!currentUser) { %>
+    <li><a href="/register">Login</a></li>
+    <% } else {%>
+
+    <li><a href="/register">Logout</a></li>
+    <% } %>
+  </ul>
+</header>
